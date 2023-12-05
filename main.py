@@ -1,3 +1,5 @@
+from PIL import Image, ImageDraw, ImageFont
+
 print('Генератор мемов запущен!')
 
 text_type = input("Введите 1, если нужен только нижний текст, и 2, если и верхний, и нижний: ")
@@ -15,3 +17,22 @@ else:
     quit()
 
 print(top_text, bottom_text)
+
+
+image = Image.open('cat_at_restaurant.png')
+
+width, height = image.size
+
+draw = ImageDraw.Draw(image)
+font = ImageFont.truetype('arial.ttf', size=70)
+
+top_text_sizes = draw.textbbox((0, 0), top_text, font)
+bottom_text_sizes = draw.textbbox((0, 0), bottom_text, font)
+
+draw.text(((width - top_text_sizes[2]) / 2, 10), top_text, font=font, fill='black')
+draw.text(
+    ((width - bottom_text_sizes[2]) / 2, (height - bottom_text_sizes[3] - 10)),
+    bottom_text, font=font, fill='black'
+)
+
+image.save('new_meme.jpg')
