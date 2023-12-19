@@ -19,7 +19,15 @@ else:
 print(top_text, bottom_text)
 
 
-image = Image.open('cat_at_restaurant.png')
+memes = ['cat_at_restaurant.png', 'cat_with_glasses.png', 'trollface.jpg']
+
+print('Выберите картинку для мема: ')
+
+for i in range(len(memes)):
+    print(i, memes[i])
+
+image = Image.open('images/' + memes[int(input('Введите номер картинки: '))])
+
 
 width, height = image.size
 
